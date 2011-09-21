@@ -1,6 +1,7 @@
 package org.textic.core.data;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 
 public class Room extends GameElement {
 
@@ -10,10 +11,23 @@ public class Room extends GameElement {
 
 	private HashMap<Direction, Exit> exits;
 
+	@SuppressWarnings("serial")
+	static class ItemCollection<T extends Item> extends LinkedHashSet<T> {
+
+		@Override
+		public String toString() {
+			return "";
+		}
+
+	}
+
+	private ItemCollection<Item> items;
+
 	public Room(String name, String description) {
 		super(name, description);
 		this.exits = new HashMap<Direction, Exit>();
 		this.visited = false;
+		this.items = new ItemCollection<Item>();
 	}
 
 	public Room setShortDescription(String shortDescription) {
@@ -31,12 +45,26 @@ public class Room extends GameElement {
 		return this;
 	}
 
+	public Room addItem(Item item) {
+		this.items.add(item);
+		return this;
+	}
+
+	public Room addItems(ItemCollection<Item> items) {
+		this.items = items;
+		return this;
+	}
+
 	public String getShortDescription() {
 		return this.shortDescription;
 	}
 
 	public boolean isVisited() {
 		return this.visited;
+	}
+
+	public ItemCollection<Item> getItems() {
+		return this.items;
 	}
 
 	@SuppressWarnings("serial")
@@ -78,8 +106,19 @@ public class Room extends GameElement {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String checkItems() {
+		return this.items.toString();
+	}
+
+	public boolean pick(Item item) {
+		return this.items.remove(item);
+	}
+
+	public boolean drop(Item item) {
+		return this.items.add(item);
 	}
 
 }
