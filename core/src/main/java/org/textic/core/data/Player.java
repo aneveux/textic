@@ -1,5 +1,7 @@
 package org.textic.core.data;
 
+import org.textic.core.util.StringCreator;
+
 public class Player extends GameElement {
 
 	private Inventory inventory;
@@ -19,14 +21,16 @@ public class Player extends GameElement {
 
 	@Override
 	public String look() {
-		// TODO Auto-generated method stub
-		return null;
+		return new StringCreator().println("--").println("Player:")
+				.println(this.name).println(this.description)
+				.println(this.inventory.look()).toString();
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return new StringCreator().println("--").println("Player:")
+				.println(this.id).println(this.name).println(this.description)
+				.println(this.inventory.toString()).toString();
 	}
 
 }

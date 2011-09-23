@@ -1,8 +1,10 @@
 package org.textic.core.data;
 
+import org.textic.core.util.StringCreator;
+
 public abstract class Item extends GameElement {
 
-	protected boolean alreadyUsed;
+	protected Boolean alreadyUsed;
 
 	protected ItemCategory category;
 
@@ -12,7 +14,7 @@ public abstract class Item extends GameElement {
 		this.category = category;
 	}
 
-	public Item setAlreadyUsed(boolean alreadyUsed) {
+	public Item setAlreadyUsed(Boolean alreadyUsed) {
 		this.alreadyUsed = alreadyUsed;
 		return this;
 	}
@@ -21,6 +23,27 @@ public abstract class Item extends GameElement {
 		return this.category;
 	}
 
+	public Boolean isAlreadyUsed() {
+		return this.alreadyUsed;
+	}
+
 	public abstract String use();
+
+	@Override
+	public String toString() {
+		return new StringCreator().println("--").println("Item:")
+				.println(this.id).println(this.name).print(" (")
+				.print(this.category.toString()).print(")")
+				.println(this.description).println("used: ")
+				.print(this.alreadyUsed.toString()).toString();
+	}
+
+	@Override
+	public String look() {
+		return new StringCreator().println("--").println("Item:")
+				.println(this.name).print(" (").print(this.category.toString())
+				.print(")").println(this.description).println("used: ")
+				.print(this.alreadyUsed.toString()).toString();
+	}
 
 }

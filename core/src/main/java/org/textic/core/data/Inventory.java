@@ -2,24 +2,26 @@ package org.textic.core.data;
 
 import java.util.Collection;
 
+import org.textic.core.util.StringCreator;
+
 public class Inventory extends GameElement {
 
 	protected ItemCollection<Item> items;
 
-	protected int maxItems;
+	protected Integer maxItems;
 
-	public Inventory(String name, String description, int maxItems) {
+	public Inventory(String name, String description, Integer maxItems) {
 		super(name, description);
 		this.maxItems = maxItems;
 		this.items = new ItemCollection<Item>();
 	}
 
-	public Inventory setMaxItems(int maxItems) {
+	public Inventory setMaxItems(Integer maxItems) {
 		this.maxItems = maxItems;
 		return this;
 	}
 
-	public int getMaxItems() {
+	public Integer getMaxItems() {
 		return this.maxItems;
 	}
 
@@ -76,14 +78,19 @@ public class Inventory extends GameElement {
 
 	@Override
 	public String look() {
-		// TODO Auto-generated method stub
-		return null;
+		return new StringCreator().println("--").println("Inventory:")
+				.println(this.name).print(" (").print(this.maxItems.toString())
+				.print(" slots)").println(this.description)
+				.println(this.items.look()).toString();
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return new StringCreator().println("--").println("Inventory:")
+				.println(this.id).println(this.name).print(" (")
+				.print(this.maxItems.toString()).print(" slots)")
+				.println(this.description).println(this.items.toString())
+				.toString();
 	}
 
 }

@@ -2,11 +2,13 @@ package org.textic.core.data;
 
 import java.util.HashMap;
 
+import org.textic.core.util.StringCreator;
+
 public class Room extends GameElement {
 
 	private String shortDescription;
 
-	private boolean visited;
+	private Boolean visited;
 
 	private HashMap<Direction, Exit> exits;
 
@@ -24,7 +26,7 @@ public class Room extends GameElement {
 		return this;
 	}
 
-	public Room setVisited(boolean visited) {
+	public Room setVisited(Boolean visited) {
 		this.visited = visited;
 		return this;
 	}
@@ -48,7 +50,7 @@ public class Room extends GameElement {
 		return this.shortDescription;
 	}
 
-	public boolean isVisited() {
+	public Boolean isVisited() {
 		return this.visited;
 	}
 
@@ -95,7 +97,13 @@ public class Room extends GameElement {
 
 	@Override
 	public String toString() {
-		return null;
+		StringCreator sc = new StringCreator().println("--").println("Room:")
+				.println(this.id).println(this.name).println(this.description)
+				.println(this.shortDescription).println("visited: ")
+				.print(this.visited.toString()).println(this.items.toString());
+		for (Direction entry : this.exits.keySet())
+			sc.println(this.exits.get(entry).toString());
+		return sc.toString();
 	}
 
 	public String checkItems() {
