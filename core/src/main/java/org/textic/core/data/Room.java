@@ -1,7 +1,6 @@
 package org.textic.core.data;
 
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 
 public class Room extends GameElement {
 
@@ -10,16 +9,6 @@ public class Room extends GameElement {
 	private boolean visited;
 
 	private HashMap<Direction, Exit> exits;
-
-	@SuppressWarnings("serial")
-	static class ItemCollection<T extends Item> extends LinkedHashSet<T> {
-
-		@Override
-		public String toString() {
-			return "";
-		}
-
-	}
 
 	private ItemCollection<Item> items;
 
